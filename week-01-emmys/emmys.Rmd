@@ -18,4 +18,34 @@ The data are drawn from the "Tidy Tuesday" project: [2021 Week 39: Emmy Awards a
 nominees <- readRDS("data/nominees_clean.rds")
 ```
 
-The rest of this document will be filled in during the live coding session on Thursday.
+## Who won the most Emmys?
+```{r winner, message = FALSE}
+winners <- nominees %>%
+  filter(type == "Winner") %>%
+  select(-type)
+
+(
+  winners_count <- winners %>%
+    count(title, sort = TRUE)
+)
+```
+
+Game of Thrones won the most Emmys.  Let's see a graph!
+
+```{r winner-plot, message = FALSE}
+#First make a new data frame with an "other" category.
+cutoff <- 60
+
+winners_count %>% filter(n >= cutoff) %>%
+  mutate(title = fct_reorder(title, n)) %>%
+  ggplot(aes(x = n, y = title)) +
+  geom_col() +
+  labs(
+    x = "Number of wins",
+    y = "Show",
+    title = "Shows with most Emmy wins",
+    subtitle = paste("Shows with more than", cutoff, "wins shown"),
+    caption = "Source: Emmys website/Susie Lu"
+  ) +
+  theme_minimal()
+```
