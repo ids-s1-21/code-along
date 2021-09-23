@@ -8,8 +8,8 @@ library(tidyverse)
 library(wesanderson) #For colour scales later
 ```
 
-*(Before running code chunks from this file, go to Session &gt; Set
-Working Directory &gt; To Files Pane Location in RStudio.)*
+*(Before running code chunks from this file, go to Session \> Set
+Working Directory \> To Files Pane Location in RStudio.)*
 
 *(Also, as you’ll see at the end, there’s a data collection error
 happened with this dataset that affects all of the analysis below. You
@@ -40,7 +40,7 @@ multiple-listed when multiple people shared the same award.
 
 ``` r
 nominees <- nominees_original %>%
-  select(category, type, title, distributor, year) %>%
+  select(category, type, title, distributor, year, page, page_id) %>%
   distinct()
 ```
 
@@ -57,7 +57,7 @@ winners <- nominees %>%
 )
 ```
 
-    ## # A tibble: 719 × 2
+    ## # A tibble: 719 x 2
     ##    title                                  n
     ##    <chr>                              <int>
     ##  1 Saturday Night Live                   61
@@ -70,7 +70,7 @@ winners <- nominees %>%
     ##  8 The Crown                             18
     ##  9 30 Rock                               16
     ## 10 Veep                                  16
-    ## # … with 709 more rows
+    ## # ... with 709 more rows
 
 *Saturday Night Live* won the most Emmys. Let’s see a graph!
 
@@ -210,7 +210,7 @@ nominees_2014 %>% select(category) %>%
   distinct()
 ```
 
-    ## # A tibble: 14 × 1
+    ## # A tibble: 14 x 1
     ##    category                                                 
     ##    <chr>                                                    
     ##  1 Outstanding Lead Actress In A Drama Series               
@@ -239,7 +239,7 @@ nominees_2013 %>% select(category) %>%
   distinct()
 ```
 
-    ## # A tibble: 81 × 1
+    ## # A tibble: 81 x 1
     ##    category                                                           
     ##    <chr>                                                              
     ##  1 Outstanding Writing For A Drama Series                             
@@ -252,7 +252,7 @@ nominees_2013 %>% select(category) %>%
     ##  8 Outstanding Directing For A Miniseries, Movie Or A Dramatic Special
     ##  9 Outstanding Miniseries Or Movie                                    
     ## 10 Outstanding Choreography                                           
-    ## # … with 71 more rows
+    ## # ... with 71 more rows
 
 We see lots of different awards. This appears to be a data problem—it
 looks like the 2014 awards haven’t been scraped properly from the
@@ -265,13 +265,13 @@ nominees %>% filter(
 )
 ```
 
-    ## # A tibble: 4 × 5
-    ##   category                 type    title        distributor  year
-    ##   <chr>                    <chr>   <chr>        <chr>       <dbl>
-    ## 1 Outstanding Drama Series Winner  Breaking Bad AMC          2013
-    ## 2 Outstanding Drama Series Nominee Breaking Bad AMC          2012
-    ## 3 Outstanding Drama Series Nominee Breaking Bad AMC          2010
-    ## 4 Outstanding Drama Series Nominee Breaking Bad AMC          2009
+    ## # A tibble: 4 x 7
+    ##   category                 type    title        distributor  year  page page_id
+    ##   <chr>                    <chr>   <chr>        <chr>       <dbl> <dbl>   <dbl>
+    ## 1 Outstanding Drama Series Winner  Breaking Bad AMC          2013   512       8
+    ## 2 Outstanding Drama Series Nominee Breaking Bad AMC          2012   568      10
+    ## 3 Outstanding Drama Series Nominee Breaking Bad AMC          2010   675       5
+    ## 4 Outstanding Drama Series Nominee Breaking Bad AMC          2009   728       3
 
 Yep, *Breaking Bad* [won this award in
 2014](https://www.emmys.com/awards/nominations/award-search?search_api_views_fulltext=&field_is_winner=1&field_award_category%5B%5D=44541&field_celebrity_details_field_display_name=&field_show_details_field_nominee_show_nr_title=&field_nominations_year_op=%3E%3D&field_nominations_year%5Bvalue%5D=2014-01-01&field_nominations_year_1_op=%3C%3D&field_nominations_year_1%5Bvalue%5D=2014-01-01).

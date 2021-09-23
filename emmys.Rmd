@@ -30,7 +30,7 @@ We need to do a little more clean-up first, because some shows are multiple-list
 
 ```{r cleanup, message = FALSE}
 nominees <- nominees_original %>%
-  select(category, type, title, distributor, year) %>%
+  select(category, type, title, distributor, year, page, page_id) %>%
   distinct()
 ```
 
