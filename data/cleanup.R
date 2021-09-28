@@ -3,7 +3,7 @@
 #code-along
 library(tidyverse)
 nominees <- read_csv(
-  'https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-09-21/nominees.csv'
+  "https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-09-21/nominees.csv"
 )
 
 nominees_clean <- nominees %>%
@@ -19,4 +19,4 @@ nominees_clean <- nominees %>%
 nominees_clean <- nominees_clean %>%
   select(-year2)
 
-saveRDS(nominees_clean, file = "week-01-emmys/data/nominees_clean.rds")
+saveRDS(nominees_clean, file = "data/nominees_clean.rds")
